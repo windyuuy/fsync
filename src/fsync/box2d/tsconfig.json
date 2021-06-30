@@ -1,0 +1,15 @@
+{
+	"extends": "../../base",
+	"compilerOptions": {
+		"outFile": "../../../dist/fsync.box2d.b2data.js"
+	},
+	"files": [
+	],
+	"references": [
+		{ "path": "../common" },
+		{ "path": "../amath" },
+	],
+	"include": [
+		"./**/*.ts"
+	]
+}

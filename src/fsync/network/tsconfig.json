@@ -1,0 +1,17 @@
+{
+	"extends": "../../base",
+	"compilerOptions": {
+		"allowJs": false,
+		"outFile": "../../../dist/fsync.network.js"
+	},
+	"files": [
+	],
+	"references": [
+		{ "path": "../common" },
+		{ "path": "../../lang/testsuite" },
+		{ "path": "../amath" },
+	],
+	"include": [
+		"./**/*.ts"
+	]
+}

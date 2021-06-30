@@ -1,0 +1,16 @@
+{
+	"extends": "../base",
+	"compilerOptions": {
+		"outFile": "../../dist/kitten.js"
+	},
+	"files": [
+	],
+	"references": [
+		{"path": "../fsync/common"},
+		{"path": "../fsync/amath"},
+		{"path": "../fsync/engine"},
+	],
+	"include": [
+		"./**/*.ts"
+	]
+}

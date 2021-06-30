@@ -1,0 +1,14 @@
+{
+	"extends": "../../base",
+	"compilerOptions": {
+		"outFile": "../../../dist/fsync.math.js"
+	},
+	"files": [
+	],
+	"references": [
+		{ "path": "../common" },
+	],
+	"include": [
+		"./**/*.ts"
+	]
+}

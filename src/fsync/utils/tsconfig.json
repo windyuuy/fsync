@@ -1,0 +1,15 @@
+{
+	"extends": "../../base",
+	"compilerOptions": {
+		"allowJs": false,
+		"outFile": "../../../dist/fsync.utils.js"
+	},
+	"files": [
+	],
+	"references": [
+		{ "path": "../common" },
+	],
+	"include": [
+		"./**/*.ts"
+	]
+}

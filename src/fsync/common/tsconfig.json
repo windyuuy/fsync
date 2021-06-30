@@ -1,0 +1,14 @@
+{
+	"extends": "../../base",
+	"compilerOptions": {
+		"outFile": "../../../dist/fsync.common.js"
+	},
+	"files": [
+	],
+	"references": [
+		{ "path": "../../lang/common" },
+	],
+	"include": [
+		"./**/*.ts"
+	]
+}

@@ -1,0 +1,15 @@
+{
+	"extends": "../../base",
+	"compilerOptions": {
+		"outFile": "../../../dist/fsync.engine.js"
+	},
+	"files": [
+	],
+	"references": [
+		{ "path": "../common" },
+		{ "path": "../amath" },
+	],
+	"include": [
+		"./**/*.ts"
+	]
+}

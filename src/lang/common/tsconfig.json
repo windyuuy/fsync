@@ -1,0 +1,11 @@
+{
+	"extends": "../../base",
+	"compilerOptions": {
+		"outFile": "../../../dist/lang.common.js"
+	},
+	"files": [
+	],
+	"include": [
+		"./**/*.ts"
+	]
+}

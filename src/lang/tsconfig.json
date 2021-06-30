@@ -1,0 +1,14 @@
+{
+	"extends": "../base",
+	"compilerOptions": {
+		"outFile": "../../dist/lang.js"
+	},
+	"references": [
+		{"path": "./common"},
+		{"path": "./testsuite"},
+	],
+	"files": [
+	],
+	"include": [
+	]
+}
