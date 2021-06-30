@@ -1,2 +1,2 @@
-# fsyncplan
+# fsync-plan
 fsync plan
