@@ -7,6 +7,7 @@
 	],
 	"references": [
 		{ "path": "../../lang/common" },
+		{ "path": "../../lang/buffer" },
 	],
 	"include": [
 		"./**/*.ts"

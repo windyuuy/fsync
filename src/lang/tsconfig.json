@@ -5,6 +5,9 @@
 	},
 	"references": [
 		{"path": "./common"},
+		{"path": "./buffer"},
+		{"path": "./log"},
+		{"path": "./types"},
 		{"path": "./testsuite"},
 	],
 	"files": [
