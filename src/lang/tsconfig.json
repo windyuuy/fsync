@@ -4,14 +4,15 @@
 		"outFile": "../../dist/lang.js"
 	},
 	"references": [
-		{"path": "./common"},
-		{"path": "./buffer"},
-		{"path": "./log"},
-		{"path": "./types"},
-		{"path": "./testsuite"},
+		// {"path": "./common"},
+		// {"path": "./buffer"},
+		// {"path": "./log"},
+		// {"path": "./types"},
+		// {"path": "./testsuite"},
 	],
 	"files": [
 	],
 	"include": [
+		"./**/*.ts",
 	]
 }

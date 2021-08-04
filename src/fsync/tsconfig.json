@@ -4,17 +4,19 @@
 		"outFile": "../../dist/fsync.js"
 	},
 	"references": [
-		{"path": "./common"},
-		{"path": "./amath"},
-		{"path": "./tsmath"},
-		{"path": "./utils"},
-		{"path": "./base91"},
-		{"path": "./network"},
-		{"path": "./box2d"},
-		{"path": "./engine"},
+		// {"path": "./common"},
+		// {"path": "./amath"},
+		// {"path": "./tsmath"},
+		// {"path": "./utils"},
+		// {"path": "./base91"},
+		// {"path": "./network"},
+		// {"path": "./box2d"},
+		// {"path": "./engine"},
+		{"path": "../lang"},
 	],
 	"files": [
 	],
 	"include": [
+		"./**/*.ts"
 	]
 }

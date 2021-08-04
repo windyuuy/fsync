@@ -6,9 +6,11 @@
 	"files": [
 	],
 	"references": [
-		{"path": "../fsync/common"},
-		{"path": "../fsync/amath"},
-		{"path": "../fsync/engine"},
+		// {"path": "../fsync/common"},
+		// {"path": "../fsync/amath"},
+		// {"path": "../fsync/engine"},
+		{"path": "../lang"},
+		{"path": "../fsync"},
 	],
 	"include": [
 		"./**/*.ts"
