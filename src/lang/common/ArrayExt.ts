@@ -45,7 +45,7 @@ interface Array<T> {
 	 * @param array 
 	 * @param index 
 	 */
-	copyTo(array: T[], index: number): void;
+	copyTo(array: T[], index?: number): void;
 
 	equals(array: T[]): boolean;
 }
