@@ -12,9 +12,9 @@ namespace graph {
 	}
 
 	export let systemEventCenter
-	export const getSystemEvent: () => slib.SEvent<SystemEvent> = () => {
+	export const getSystemEvent: () => fsync.event.SEvent<SystemEvent> = () => {
 		if (systemEventCenter == null) {
-			systemEventCenter = new slib.SEvent<SystemEvent>()
+			systemEventCenter = new fsync.event.SEvent<SystemEvent>()
 		}
 		return systemEventCenter
 	}

@@ -1,4 +1,4 @@
-namespace slib {
+namespace fsync.event {
 	export type EventHandler<T> = (message: T) => void
 	export class SimpleEvent<T> {
 		protected _callbacks: EventHandler<T>[] = []
