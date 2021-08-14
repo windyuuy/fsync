@@ -20,23 +20,94 @@ namespace fsync {
 
 		}
 
-		static top(self: BLRect): Vector2 {
+		get centerX() {
+			return this.x
+		}
+
+		get centerY() {
+			return this.y
+		}
+
+		get top(): Vector2 {
+			return Rect.top(this)
+		}
+
+		get bottom(): Vector2 {
+			return Rect.bottom(this)
+		}
+
+		get center(): Vector2 {
+			return Rect.center(this)
+		}
+
+		get leftX() {
+			return this.x
+		}
+
+		get rightX() {
+			return this.x + this.width
+		}
+
+		get left() {
+			let self = this
+			return new Vector2(self.x, self.y + this.height / 2)
+		}
+
+		get right() {
+			let self = this
+			return new Vector2(self.x + self.width, self.y + this.height / 2)
+		}
+
+		fromRectLike({ x, y, width, height }: IWHRectSpec): Rect {
+			return Rect.fromRectLike(this)
+		}
+
+		copyRectLike(spec: IWHRectSpec): Rect {
+			return Rect.copyRectLike(this, spec)
+		}
+
+		reset() {
+			return Rect.reset(this)
+		}
+
+		mergeFrom(rect: Rect) {
+			return Rect.mergeFrom(this, rect)
+		}
+
+		clone() {
+			return Rect.clone(this)
+		}
+
+		containPoint(pt: IVector): bool {
+			return Rect.containPoint(this, pt)
+		}
+
+		/**
+		 * 将点就近限制在矩形框内
+		 * @param rect 
+		 * @param pt 
+		 */
+		limitPointSelf(pt: IVector): void {
+			return Rect.limitPointSelf(this, pt)
+		}
+
+		static top(self: IWHRectSpec): Vector2 {
 			return new Vector2(self.x + self.width / 2, self.y + self.height)
 		}
 
-		static bottom(self: BLRect): Vector2 {
+		static bottom(self: IWHRectSpec): Vector2 {
 			return new Vector2(self.x + self.width / 2, self.y)
 		}
 
-		static center(self: BLRect): Vector2 {
+		static center(self: IWHRectSpec): Vector2 {
 			return new Vector2(self.x + self.width / 2, self.y + self.height / 2)
 		}
 
-		static fromRectLike({ x, y, width, height }: IBLWHRectSpec): BLRect {
+		static fromRectLike({ x, y, width, height }: IBLWHRectSpec): IWHRectSpec {
 			return new BLRect(x, y, width, height)
 		}
 
-		static copyRectLike(self: BLRect, { x, y, width, height }: IBLWHRectSpec): BLRect {
+		static copyRectLike(self: IWHRectSpec, { x, y, width, height }: IBLWHRectSpec): IWHRectSpec {
 			self.x = x
 			self.y = y
 			self.width = width
@@ -44,7 +115,7 @@ namespace fsync {
 			return self
 		}
 
-		static reset(self: BLRect) {
+		static reset(self: IWHRectSpec) {
 			self.x = 0
 			self.y = 0
 			self.width = 0
@@ -52,7 +123,7 @@ namespace fsync {
 			return self
 		}
 
-		static mergeFrom(self: BLRect, rect: BLRect) {
+		static mergeFrom(self: IWHRectSpec, rect: IWHRectSpec) {
 			self.width = rect.width
 			self.height = rect.height
 			self.x = rect.x
@@ -60,13 +131,13 @@ namespace fsync {
 			return self
 		}
 
-		static clone(self: BLRect) {
+		static clone(self: IWHRectSpec) {
 			let rect = new BLRect()
 			this.mergeFrom(rect, self)
 			return rect
 		}
 
-		static containPoint(rect: BLRect, pt: IVector): boolean {
+		static containPoint(rect: IWHRectSpec, pt: IVector): boolean {
 			let ns = pt.getBinData()
 			let x = ns[0]
 			let y = ns[1]
@@ -85,7 +156,7 @@ namespace fsync {
 		 * @param rect
 		 * @param pt
 		 */
-		static limitPointSelf(rect: BLRect, pt: IVector): void {
+		static limitPointSelf(rect: IWHRectSpec, pt: IVector): void {
 			let ns = pt.getBinData()
 			let x = ns[0]
 			let y = ns[1]

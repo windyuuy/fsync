@@ -21,6 +21,78 @@ namespace fsync {
 
 		}
 
+		get centerX() {
+			return this.x
+		}
+
+		get centerY() {
+			return this.y
+		}
+
+		get top(): Vector2 {
+			return Rect.top(this)
+		}
+
+		get bottom(): Vector2 {
+			return Rect.bottom(this)
+		}
+
+		get center(): Vector2 {
+			return Rect.center(this)
+		}
+
+		get leftX() {
+			return this.x - this.width / 2
+		}
+
+		get rightX() {
+			return this.x + this.width / 2
+		}
+
+		get left() {
+			let self = this
+			return new Vector2(self.x - self.width / 2, self.y)
+		}
+
+		get right() {
+			let self = this
+			return new Vector2(self.x + self.width / 2, self.y)
+		}
+
+		fromRectLike({ x, y, width, height }: IWHRectSpec): Rect {
+			return Rect.fromRectLike(this)
+		}
+
+		copyRectLike(spec: IWHRectSpec): Rect {
+			return Rect.copyRectLike(this, spec)
+		}
+
+		reset() {
+			return Rect.reset(this)
+		}
+
+		mergeFrom(rect: Rect) {
+			return Rect.mergeFrom(this, rect)
+		}
+
+		clone() {
+			return Rect.clone(this)
+		}
+
+		containPoint(pt: IVector): bool {
+			return Rect.containPoint(this, pt)
+		}
+
+		/**
+		 * 将点就近限制在矩形框内
+		 * @param rect 
+		 * @param pt 
+		 */
+		limitPointSelf(pt: IVector): void {
+			return Rect.limitPointSelf(this, pt)
+		}
+
+
 		static top(self: Rect): Vector2 {
 			return new Vector2(self.x, self.y + self.height / 2)
 		}
@@ -35,6 +107,10 @@ namespace fsync {
 
 		static fromRectLike({ x, y, width, height }: IWHRectSpec): Rect {
 			return new Rect(x, y, width, height)
+		}
+
+		static fromBLRectLike({ x, y, width, height }: IWHRectSpec): Rect {
+			return new Rect(x + width / 2, y + height / 2, width, height)
 		}
 
 		static copyRectLike(self: Rect, { x, y, width, height }: IWHRectSpec): Rect {

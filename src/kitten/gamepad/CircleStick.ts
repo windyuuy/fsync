@@ -7,6 +7,7 @@ namespace kitten.gamepad {
 	const Vector = fsync.Vector
 	type BLRect = fsync.BLRect
 	const BLRect = fsync.BLRect
+	type IWHRectSpec = fsync.IWHRectSpec
 
 	/**
 	 * 环状摇杆
@@ -188,13 +189,13 @@ namespace kitten.gamepad {
 			return this.circleRadius
 		}
 
-		touchRange: BLRect
+		touchRange: IWHRectSpec
 
 		/**
 		 * 设置触控范围
 		 * @param rect 
 		 */
-		setTouchRange(rect: BLRect) {
+		setTouchRange(rect: IWHRectSpec) {
 			this.touchRange.height = rect.height
 			this.touchRange.width = rect.width
 			this.touchRange.x = rect.x
@@ -204,7 +205,7 @@ namespace kitten.gamepad {
 		/**
 		 * 获取触控范围
 		 */
-		protected getTouchRange(): BLRect {
+		protected getTouchRange(): IWHRectSpec {
 			// let width = this.circleRadius
 			// let height = this.circleRadius
 			// return {
