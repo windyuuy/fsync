@@ -1,3 +1,5 @@
+
+
 interface Array<T> {
 	/**
 	 * 从列表中移除某个对象
@@ -51,30 +53,23 @@ interface Array<T> {
 }
 
 (function () {
+	const define = lang.objext.fixMissingAttr
 	var p = Array.prototype
 
-	function define(name, func) {
-		if (p[name] != null) {
-			return;
-		}
-		try {
-			Object.defineProperty(p, name, {
-				value: func,
-				enumerable: false
-			})
-		} catch (e) {
-
-		}
-	}
-
-	define("remove", function (value) {
+	define(p, "remove", function (value) {
 		var index = this.indexOf(value)
 		if (index != -1) {
 			this.splice(index, 1)
 		}
 		return this;
 	})
-	define("sum", function (callback) {
+	define(p, "removeAt", function (index: number) {
+		if (index >= 0) {
+			this.splice(index, 1)
+		}
+		return this;
+	})
+	define(p, "sum", function (callback) {
 		var sum = 0;
 		for (var i = 0; i < this.length; i++) {
 			var element = this[i];
@@ -83,11 +78,11 @@ interface Array<T> {
 		}
 		return sum;
 	})
-	define("pushList", function (array) {
+	define(p, "pushList", function (array) {
 		this.push(...array)
 		return this;
 	})
-	define("unpack", function () {
+	define(p, "unpack", function () {
 		if (this[0] instanceof Array == false)
 			return this;
 		var a = this[0];
@@ -96,7 +91,7 @@ interface Array<T> {
 		}
 		return a;
 	})
-	define("find", function (callback, thisArg) {
+	define(p, "find", function (callback, thisArg) {
 		for (var i = 1; i < this.length; i++) {
 			var e = callback(this[i], i, this)
 			if (typeof (e) == "undefined") {
@@ -108,18 +103,18 @@ interface Array<T> {
 		}
 		return undefined
 	})
-	define("clear", function () {
+	define(p, "clear", function () {
 		return this.length = 0
 	})
-	define("contains", function (e) {
+	define(p, "contains", function (e) {
 		return this.indexOf(e) != -1
 	})
-	define("copyTo", function (e, start = 0) {
+	define(p, "copyTo", function (e, start = 0) {
 		for (var i = 0; i < this.length; i++) {
 			e[start + i] = this[i]
 		}
 	})
-	define("equals", function (e): boolean {
+	define(p, "equals", function (e): boolean {
 		if (this.length != e.length) {
 			return false;
 		}
