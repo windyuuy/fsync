@@ -25,6 +25,11 @@ namespace fsync {
 		static oidAcc = 1
 		oid: number = 0
 
+		/**
+		 * 初始化
+		 * - oid
+		 * @returns 
+		 */
 		init() {
 			this.oid = Timer.oidAcc++
 			return this
@@ -68,6 +73,10 @@ namespace fsync {
 			return this._curTime - this._startTime
 		}
 
+		/**
+		 * 设置游戏起始时间和起始状态
+		 * @param time 
+		 */
 		setTime(time: TTimeStamp) {
 			this._curTime = time
 			this._deltaTime = 0
