@@ -1,6 +1,12 @@
 namespace lang.libs {
 
-    export type LogParam = { time?: boolean, tags?: string[] }
+    /**
+     * 日志参数
+     */
+    export interface ILogParam {
+        time?: boolean
+        tags?: string[]
+    }
 
     export class Log {
 
@@ -71,11 +77,11 @@ namespace lang.libs {
         protected time?: boolean
         protected tags?: string[]
 
-        constructor(x: LogParam = {}) {
+        constructor(x: ILogParam = {}) {
             this.setLogParams(x)
         }
 
-        setLogParams({ time, tags }: LogParam = {}) {
+        setLogParams({ time, tags }: ILogParam = {}) {
             this.time = time
             if (tags) {
                 this.tags = tags.concat()
@@ -91,6 +97,29 @@ namespace lang.libs {
             return tag
         }
 
+        log(...args) {
+            // if (this.tags) {
+            //     args = this.tags.concat(args)
+            // }
+            // if (this.time) {
+            //     args.push(new Date().getTime())
+            // }
+            console.log(' -', this.getTagsStamp(), ...args);
+        }
+
+        /**
+         * 将消息打印到控制台，不存储至日志文件
+         */
+        debug(...args) {
+            // if (this.tags) {
+            //     args = this.tags.concat(args)
+            // }
+            // if (this.time) {
+            //     args.push(new Date().getTime())
+            // }
+            console.debug(' -', this.getTagsStamp(), ...args);
+        }
+
         /**
          * 将消息打印到控制台，不存储至日志文件
          */
@@ -101,7 +130,7 @@ namespace lang.libs {
             // if (this.time) {
             //     args.push(new Date().getTime())
             // }
-            console.log(' -', this.getTagsStamp(), ...args);
+            console.info(' -', this.getTagsStamp(), ...args);
         }
 
         /**

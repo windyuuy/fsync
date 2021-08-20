@@ -5,6 +5,7 @@
     // "incremental": true,                   /* Enable incremental compilation */
     // "outDir": "../dist/",
     "outFile": "./dist/fsyncplan.js",
+    // "outFile": "./dist/fsyncplan.js",
     // "outFile": "D:/DATA/Projects/pockme/assets/scripts/deps/3.fsync.js",
     // "outFile": "E:/Libs/supertank/assets/scripts/deps/3.fsync.js",
     // "outFile": "D:/DATA/Projects/ECSWithBox2DGame/src/deps/3.fsync.js",
