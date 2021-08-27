@@ -50,6 +50,14 @@ interface Array<T> {
 	copyTo(array: T[], index?: number): void;
 
 	equals(array: T[]): boolean;
+
+	/**
+	 * 从尾部追加
+	 * @param source 
+	 * @param offset 
+	 */
+	extend(source: Array<T>, offset?: number): this
+
 }
 
 (function () {
@@ -124,5 +132,18 @@ interface Array<T> {
 			}
 		}
 		return true;
+	})
+	define(p, "extend", function (a: Array<any>, offset: number): boolean {
+		if (offset === undefined) {
+			for (let i = 0; i < a.length; i++) {
+				this.push(a[i])
+			}
+		} else {
+			let selfLen = this.length
+			for (let i = 0; i < a.length; i++) {
+				this[selfLen + offset] = a[i]
+			}
+		}
+		return this
 	})
 })();

@@ -104,5 +104,18 @@ namespace lang {
 			}
 			return values
 		}
+
+		/**
+		 * 计算项数
+		 * @param source 
+		 * @returns 
+		 */
+		static count(source: Object): number {
+			let c = 0
+			for (let key in source) {
+				c++
+			}
+			return c
+		}
 	}
 }

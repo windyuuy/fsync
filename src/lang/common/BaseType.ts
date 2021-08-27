@@ -41,4 +41,7 @@ namespace lang {
 		}
 	}
 
+	export type TStrMap<T> = { [key: string]: T }
+	export type TNumMap<T> = { [key: string]: T }
+
 }
