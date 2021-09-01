@@ -21,6 +21,10 @@ namespace fsync {
 		 * 游戏开始时间点
 		 */
 		protected _startTime: TTimeStamp = 0
+		/**
+		 * 时间误差校准
+		 */
+		timerOffset: TTimeStamp = 0
 
 		static oidAcc = 1
 		oid: number = 0
@@ -48,7 +52,7 @@ namespace fsync {
 		 * - 和 getGameTime() 的区别在于, getGameTime 的起始时间点为 0, getTime 的起始时间点和游戏开始时的 Date.now() 基本一致
 		 */
 		getTime(): TTimeStamp {
-			return this._curTime
+			return this._curTime + this.timerOffset
 		}
 
 		updateTime(time: TTimeStamp) {
@@ -62,7 +66,7 @@ namespace fsync {
 		 * 重设游戏开始时间点
 		 * @param time 
 		 */
-		setStartTime(time: TTimeStamp) {
+		setGameStartTime(time: TTimeStamp) {
 			this._startTime = time
 		}
 
@@ -77,10 +81,11 @@ namespace fsync {
 		 * 设置游戏起始时间和起始状态
 		 * @param time 
 		 */
-		setTime(time: TTimeStamp) {
+		setStartTime(time: TTimeStamp) {
+			this._curTimeRecord = time
 			this._curTime = time
 			this._deltaTime = 0
-			this.setStartTime(time)
+			this.setGameStartTime(time)
 		}
 
 		get deltaTime(): TTimeStamp {

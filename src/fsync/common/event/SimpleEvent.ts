@@ -17,6 +17,9 @@ namespace fsync.event {
 				callback(value)
 			})
 		}
+		clear() {
+			this._callbacks.clear()
+		}
 	}
 
 	export interface ISEventInput<T> {
