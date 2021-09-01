@@ -66,17 +66,17 @@ namespace lang {
 	export class ObjectUtils {
 		/**
 		 * 深度复制
-		 * @param source 
 		 * @param target 
+		 * @param source 
 		 */
-		static copyDataDeep<T extends object>(source: T, target: T): T {
-			if (target == null) {
+		static copyDataDeep<T extends object>(target: T, source: T): T {
+			if (source == null) {
 				return null
-			} else if (typeof (source) == "object" && typeof (target) == "object") {
-				_copyDataDeep(source, target)
-				return source
-			} else {
+			} else if (typeof (target) == "object" && typeof (source) == "object") {
+				_copyDataDeep(target, source)
 				return target
+			} else {
+				return source
 			}
 		}
 
