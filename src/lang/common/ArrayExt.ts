@@ -58,6 +58,12 @@ interface Array<T> {
 	 */
 	extend(source: Array<T>, offset?: number): this
 
+	/**
+	 * 判断元素是否已存在
+	 * @param source 
+	 * @param ele 
+	 */
+	exist(ele: T): boolean
 }
 
 (function () {
@@ -145,5 +151,8 @@ interface Array<T> {
 			}
 		}
 		return this
+	})
+	define(p, "exist", function (ele: any): boolean {
+		return this.indexOf(ele) >= 0
 	})
 })();
