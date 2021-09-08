@@ -45,7 +45,7 @@ namespace fsync {
 		isFirstTimeUpdateProgress: boolean
 		isWithProgress: boolean
 		readonly progress
-		onProgress(call: (count: number, total: number, diff: number, isFirst: boolean) => void)
+		onProgress(call: (count: number, total: number, diff: number, totalDiff: number, isFirst: boolean) => void)
 		notifyProgress(count: number, total: number): void
 		supportProgressAttr: boolean
 	}
@@ -64,7 +64,7 @@ namespace fsync {
 		}
 	})
 	Object.defineProperty(PPromise_Prototype, "onProgress", {
-		value: function (call: (count: number, total: number, diff: number, isFirst: boolean) => void) {
+		value: function (call: (count: number, total: number, diff: number, totalDiff: number, isFirst: boolean) => void) {
 			if (this.calls == undefined) {
 				this.calls = []
 			}
@@ -78,11 +78,12 @@ namespace fsync {
 				this.isFirstTimeUpdateProgress = false
 			}
 			let diff = count - this.count
+			let totalDiff = total - this.total
 			this.count = count
 			this.total = total
 			if (this.calls) {
 				this.calls.concat().forEach(call => {
-					call(count, total, diff, isFirst)
+					call(count, total, diff, totalDiff, isFirst)
 				})
 			}
 		},
