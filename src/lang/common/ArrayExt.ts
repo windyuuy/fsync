@@ -64,6 +64,12 @@ interface Array<T> {
 	 * @param ele 
 	 */
 	exist(ele: T): boolean
+
+	/**
+	 * 按固定长度分割数组
+	 * @param count 
+	 */
+	splitByCount(count: number): (Array<T>)[]
 }
 
 (function () {
@@ -154,5 +160,16 @@ interface Array<T> {
 	})
 	define(p, "exist", function (ele: any): boolean {
 		return this.indexOf(ele) >= 0
+	})
+	define(p, "splitByCount", function (count: number): any[][] {
+		let arrs = []
+		for (let i = 0; i < this.length; i += count) {
+			let arr = []
+			arrs.push(arr)
+			for (let j = i; j < i + count; j++) {
+				arr.push(this[j])
+			}
+		}
+		return arrs
 	})
 })();
