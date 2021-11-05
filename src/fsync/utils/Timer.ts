@@ -55,7 +55,14 @@ namespace fsync {
 			return this._curTime + this.timerOffset
 		}
 
+		paused: boolean = false
+
 		updateTime(time: TTimeStamp) {
+			if (this.paused) {
+				this._curTimeRecord = time
+				return
+			}
+
 			const dt = time - this._curTimeRecord
 			this._curTimeRecord = time
 			this._deltaTime = Math.min(dt, this._maxDeltaTime)

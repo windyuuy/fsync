@@ -70,6 +70,17 @@ interface Array<T> {
 	 * @param count 
 	 */
 	splitByCount(count: number): (Array<T>)[]
+
+	/**
+	 * 查找出最大的值
+	 */
+	max(callback: (a: T) => number): T
+
+	/**
+	 * 查找出最小的值
+	 */
+	min(callback: (a: T) => number): T
+
 }
 
 (function () {
@@ -171,5 +182,45 @@ interface Array<T> {
 			}
 		}
 		return arrs
+	})
+
+	var NULL = Symbol('null')
+	define(p, "max", function (callback) {
+		if (this.length <= 0) {
+			return undefined
+		}
+		var maxItem = NULL
+		var maxValue = undefined
+		for (var i = 0; i < this.length; i++) {
+			var element = this[i];
+			var value = callback(element)
+			if (maxItem == NULL || maxValue < value) {
+				maxItem = element
+				maxValue = value
+			}
+		}
+		if (maxItem == NULL) {
+			maxItem = undefined
+		}
+		return maxItem;
+	})
+	define(p, "min", function (callback) {
+		if (this.length <= 0) {
+			return undefined
+		}
+		var maxItem = NULL
+		var maxValue = undefined
+		for (var i = 0; i < this.length; i++) {
+			var element = this[i];
+			var value = callback(element)
+			if (maxItem == NULL || maxValue > value) {
+				maxItem = element
+				maxValue = value
+			}
+		}
+		if (maxItem == NULL) {
+			maxItem = undefined
+		}
+		return maxItem;
 	})
 })();

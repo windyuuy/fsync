@@ -93,6 +93,22 @@ namespace lang {
 			return target as T
 		}
 
+		/**
+		 * @noSelf
+		 */
+		static merge<T extends Object>(srcObj: Object, destObj: T): T {
+			assert(typeof srcObj == 'object', 'srcObj is not a table for merge')
+			assert(typeof destObj == 'object', 'destObj is not a table for merge')
+
+			for (let key in srcObj) {
+				if (key != undefined) {
+					destObj[key] = srcObj[key]
+				}
+			}
+
+			return destObj
+		}
+
 		static values<T extends object>(source: { [key: string]: T }): T[] {
 			if (Object.values) {
 				return Object.values(source)
