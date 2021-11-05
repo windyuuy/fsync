@@ -17,6 +17,7 @@ namespace fsync.event {
 				callback(value)
 			})
 		}
+
 		clear() {
 			this._callbacks.clear()
 		}
@@ -47,12 +48,12 @@ namespace fsync.event {
 		}
 
 		once(key: string, callback: EventHandler<T>): { key: string, callback: EventHandler<T> } {
-			const call = (evt) => {
+			const call: EventHandler<T> = (evt) => {
 				this.off(key, call)
 				callback(evt)
 			}
 			this.on(key, call)
-			return { key, callback }
+			return { key, callback: call }
 		}
 
 		off(key: string, callback: EventHandler<T>) {
@@ -73,6 +74,16 @@ namespace fsync.event {
 					event.emit(value)
 				}
 			}
+		}
+
+		clear() {
+			for (let key in this._events) {
+				let event = this._events[key]
+				if (event) {
+					event.clear()
+				}
+			}
+			this._events = Object.create(null)
 		}
 	}
 }
