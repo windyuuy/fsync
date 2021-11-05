@@ -9,7 +9,7 @@
             "es2015.promise"
         ],
         "preserveConstEnums": true,
-        "sourceMap": true,
+        "sourceMap": false,
         "declaration": true,
         "experimentalDecorators": true,
         "composite": true,
