@@ -49,6 +49,8 @@ interface Array<T> {
 	 */
 	copyTo(array: T[], index?: number): void;
 
+	mergeFrom(array: T[]): void
+
 	equals(array: T[]): boolean;
 
 	/**
@@ -80,6 +82,11 @@ interface Array<T> {
 	 * 查找出最小的值
 	 */
 	min(callback: (a: T) => number): T
+
+	/**
+	 * 仅在尚不存在等值元素时，addUnique 才会向容器添加新元素
+	 */
+	addUnique(ele: T): boolean
 
 }
 
@@ -143,6 +150,11 @@ interface Array<T> {
 	define(p, "copyTo", function (e, start = 0) {
 		for (var i = 0; i < this.length; i++) {
 			e[start + i] = this[i]
+		}
+	})
+	define(p, "mergeFrom", function (e) {
+		for (let i = 0; i < e.length; i++) {
+			this[i] = e[i]
 		}
 	})
 	define(p, "equals", function (e): boolean {
@@ -222,5 +234,12 @@ interface Array<T> {
 			maxItem = undefined
 		}
 		return maxItem;
+	})
+	define(p, "addUnique", function (ele: any): boolean {
+		if (this.indexOf(ele) < 0) {
+			this.push(ele)
+			return true
+		}
+		return false
 	})
 })();
