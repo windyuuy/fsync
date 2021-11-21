@@ -76,9 +76,28 @@ namespace lang.libs {
 
         protected time?: boolean
         protected tags?: string[]
+        protected dirty: boolean = true
 
         constructor(x: ILogParam = {}) {
             this.setLogParams(x)
+        }
+
+        appendTag(tag: string) {
+            if (this.tags) {
+                this.tags.push(tag)
+            } else {
+                this.tags = [tag]
+            }
+            this.dirty = this.dirty || !!tag
+            return this
+        }
+
+        appendTags(tags: string[]) {
+            for (let tag of tags) {
+                this.appendTag(tag)
+            }
+            this.dirty = this.dirty || tags.length > 0
+            return this
         }
 
         setLogParams({ time, tags }: ILogParam = {}) {
@@ -86,14 +105,30 @@ namespace lang.libs {
             if (tags) {
                 this.tags = tags.concat()
             }
+            this.dirty = true
+            return this
         }
 
-
+        protected _cachedTagsStamp!: string
         protected getTagsStamp() {
-            let tag = `[${this.tags.join('][')}]`
+            if (!this.dirty) {
+                return this._cachedTagsStamp
+            }
+
+            let tag: string
+            if (this.tags) {
+                tag = `[${this.tags.join('][')}]`
+            } else {
+                tag = ""
+            }
+
             if (this.time) {
                 tag = tag + `[t/${Date.now()}]`
             }
+
+            this._cachedTagsStamp = tag
+            this.dirty = false
+
             return tag
         }
 
@@ -164,6 +199,31 @@ namespace lang.libs {
             }
             console.log('>>>error')
             console.log(new Error().stack)
+        }
+
+        mergeFrom(source: Log) {
+            this.time = source.time
+            if (source.tags) {
+                if (this.tags) {
+                    for (let i = 0; i < source.tags.length; i++) {
+                        this.tags[i] = source.tags[i]
+                    }
+                } else {
+                    this.tags = source.tags.concat()
+                }
+            } else {
+                if (this.tags) {
+                    this.tags.length = 0
+                }
+            }
+            this.dirty = source.dirty
+            this._cachedTagsStamp = source._cachedTagsStamp
+        }
+
+        clone() {
+            let log = new Log()
+            log.mergeFrom(this)
+            return log
         }
 
     }
