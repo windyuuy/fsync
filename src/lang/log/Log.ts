@@ -11,26 +11,13 @@ namespace lang.libs {
     export class Log {
 
         private static _enablePlainLog: boolean = false;
+        /**
+         * 是否启用平铺日志
+         * - 如果启用平铺日志, 将会直接序列化日志对象, 转换为字符串打印出来
+         */
         public static get enablePlainLog(): boolean {
             return Log._enablePlainLog;
         }
-        public static toPlainLog(args: any[]) {
-            const plainTexts = []
-            for (let info of args) {
-                let ret = ''
-                if (info instanceof Error) {
-                    ret = `Error content: ${JSON.stringify(info)}\n${info.stack}`
-                } else if (info instanceof Object) {
-                    ret = JSON.stringify(info)
-                } else {
-                    ret = info
-                }
-                plainTexts.push(ret)
-            }
-
-            return plainTexts
-        }
-
         public static set enablePlainLog(value: boolean) {
             Log._enablePlainLog = value;
             if (value) {
@@ -66,22 +53,59 @@ namespace lang.libs {
                 }
             }
         }
+        /**
+         * 将对象转换为平铺日志
+         * - 如果启用平铺日志, 将会直接序列化日志对象, 转换为字符串打印出来
+         */
+        public static toPlainLog(args: any[]) {
+            const plainTexts = []
+            for (let info of args) {
+                let ret = ''
+                if (info instanceof Error) {
+                    ret = `Error content: ${JSON.stringify(info)}\n${info.stack}`
+                } else if (info instanceof Object) {
+                    ret = JSON.stringify(info)
+                } else {
+                    ret = info
+                }
+                plainTexts.push(ret)
+            }
+
+            return plainTexts
+        }
 
         protected static _instance: Log
+        /**
+         * 可选使用的单例
+         */
         public static get instance(): Log {
             if (!this._instance)
                 this._instance = new Log();
             return this._instance;
         }
 
+        /**
+         * 是否打印时间戳
+         */
         protected time?: boolean
+        /**
+         * 日志标签
+         */
         protected tags?: string[]
+        /**
+         * 日志选项内容是否需要更新
+         */
         protected dirty: boolean = true
 
         constructor(x: ILogParam = {}) {
-            this.setLogParams(x)
+            this.setLogOptions(x)
         }
 
+        /**
+         * 尾部追加标签
+         * @param tag 
+         * @returns 
+         */
         appendTag(tag: string) {
             if (this.tags) {
                 this.tags.push(tag)
@@ -92,6 +116,11 @@ namespace lang.libs {
             return this
         }
 
+        /**
+         * 尾部追加标签列表
+         * @param tags 
+         * @returns 
+         */
         appendTags(tags: string[]) {
             for (let tag of tags) {
                 this.appendTag(tag)
@@ -100,7 +129,12 @@ namespace lang.libs {
             return this
         }
 
-        setLogParams({ time, tags }: ILogParam = {}) {
+        /**
+         * 设置日志选项
+         * @param param0 
+         * @returns 
+         */
+        setLogOptions({ time, tags }: ILogParam = {}) {
             this.time = time
             if (tags) {
                 this.tags = tags.concat()
@@ -109,7 +143,14 @@ namespace lang.libs {
             return this
         }
 
+        /**
+         * 缓存的日志标签戳
+         */
         protected _cachedTagsStamp!: string
+        /**
+         * 获取日志标签戳
+         * @returns 
+         */
         protected getTagsStamp() {
             if (!this.dirty) {
                 return this._cachedTagsStamp
@@ -132,6 +173,10 @@ namespace lang.libs {
             return tag
         }
 
+        /**
+         * log通道打印日志，并储至日志文件
+         * @param args 
+         */
         log(...args) {
             // if (this.tags) {
             //     args = this.tags.concat(args)
@@ -201,6 +246,10 @@ namespace lang.libs {
             console.log(new Error().stack)
         }
 
+        /**
+         * 从目标覆盖日志选项到自身
+         * @param source 
+         */
         mergeFrom(source: Log) {
             this.time = source.time
             if (source.tags) {
@@ -220,6 +269,10 @@ namespace lang.libs {
             this._cachedTagsStamp = source._cachedTagsStamp
         }
 
+        /**
+         * 克隆自己
+         * @returns 
+         */
         clone() {
             let log = new Log()
             log.mergeFrom(this)
@@ -228,6 +281,9 @@ namespace lang.libs {
 
     }
 
+    /**
+     * 可选使用的日志单例
+     */
     export var log = Log.instance
 
 }
